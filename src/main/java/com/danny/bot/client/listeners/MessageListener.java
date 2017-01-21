@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.danny.bot.client.constants.ClientConstants;
+import com.danny.bot.util.UserUtil;
 
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
@@ -34,15 +35,10 @@ public class MessageListener {
 	    IChannel currentChannel = message.getChannel();
 	    List<IUser> usersMentioned = message.getMentions();
 	    
-	    Optional<String> optionalName;
-	    String name;
+	    String name; 
 	    for (IUser user : usersMentioned) {
-	    	optionalName = user.getNicknameForGuild(currentGuild);
-	    	if (optionalName.isPresent()) {
-	    		name = optionalName.get();
-	    	} else {
-	    		name = user.getName();
-	    	}//TODO add delay for spammers
+	    	name = UserUtil.getName(user, currentGuild);
+	    	//TODO add delay for spammers
 	    	if (!name.equalsIgnoreCase(ClientConstants.BOTNAME)) {
 	    		currentChannel.sendMessage(name + " likes cows");
 	    	} else {
