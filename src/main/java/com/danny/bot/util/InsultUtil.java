@@ -13,7 +13,7 @@ public final class InsultUtil {
 	private static Random random = new Random();
 	
 	public static String getInsult(String name) {
-		int randNum = random.nextInt(8);
+		int randNum = random.nextInt(9);
 		switch(randNum) {
 		case 0:
 			return name + ", i saw that";
@@ -31,6 +31,8 @@ public final class InsultUtil {
 			return name + " needs to buy a kit";
 		case 7:
 			return name + " needs help";
+		case 8:
+			return "Good Clothes. Visit: http://www.milleniumbrand.com/";
 		default:
 			return name + " likes cows";
 			
