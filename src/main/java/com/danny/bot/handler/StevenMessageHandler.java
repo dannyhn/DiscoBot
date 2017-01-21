@@ -23,6 +23,7 @@ public class StevenMessageHandler implements MessageHandler {
 
 		try {
 			currentChannel.sendMessage(messageToSend);
+			message.delete();
 		} catch (MissingPermissionsException | RateLimitException | DiscordException e) {
 			//e.printStackTrace();
 			System.out.println("Error Handling Steven Message: " + message.getContent()  + " " + e.getMessage());

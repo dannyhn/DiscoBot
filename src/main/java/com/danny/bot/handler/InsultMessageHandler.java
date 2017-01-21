@@ -50,6 +50,7 @@ public class InsultMessageHandler implements MessageHandler {
 	public void handleMessage(IMessage message) {
 		try {
 			sendsInsult(message);
+			message.delete();
 		} catch (Exception e) {
 			System.out.println("Error Handling Insult Message: " + message.getContent()  + " " + e.getMessage());
 			//e.printStackTrace();
