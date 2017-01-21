@@ -1,11 +1,9 @@
 # DannyBot
-Discord Bot Created by Danny N.
+A Discord Bot Created and Designed by Danny N. in Collaboration with Tiffany T.
+Prefix: .
 
-The bot is under construction.
+The bot is under construction!!
 
-Things that it can do now:
-  - Replies to any @usermention to reply with "NICKNAME likes cows"
-
-Goals:
-  - Maybe create a prefix for the bot
-  - Reply with an insult using @usermention
+Commands and Features:
+  - .i [@usermention] : DannyBot replies with a random insult
+  - .steven : DannyBot posts a link to support Millénium Brand.
