@@ -7,6 +7,8 @@ import com.danny.bot.handler.StevenMessageHandler;
 import sx.blah.discord.handle.obj.IMessage;
 
 /**
+ * Factory that determines which MessageHandler to use
+ * 
  * @author Tiffany
  *
  */

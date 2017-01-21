@@ -12,6 +12,8 @@ import sx.blah.discord.handle.obj.IUser;
 public final class UserUtil {
 
 	/**
+	 * Gets name of User based off Guild
+	 * 
 	 * @param user
 	 * @param guild
 	 * @return

@@ -8,6 +8,8 @@ import sx.blah.discord.util.RateLimitException;
 
 
 /**
+ * Message Handler for Steven
+ * 
  * @author Tiffany
  *
  */

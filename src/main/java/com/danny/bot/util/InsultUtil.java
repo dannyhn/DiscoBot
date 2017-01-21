@@ -16,6 +16,8 @@ public final class InsultUtil {
 	private static Random random = new Random();
 	
 	/**
+	 * Returns a random Insult
+	 * 
 	 * @param name
 	 * @return
 	 */

@@ -13,6 +13,8 @@ import sx.blah.discord.util.DiscordException;
 public final class ClientLoginUtil {
 
 	/**
+	 * Creates a Client and logs in
+	 * 
 	 * @param token
 	 * @param login
 	 * @return
