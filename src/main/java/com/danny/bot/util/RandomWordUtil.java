@@ -1,12 +1,16 @@
 package com.danny.bot.util;
 
-import java.io.File;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
+import org.apache.commons.io.IOUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -30,19 +34,22 @@ public final class RandomWordUtil {
 	public static void init() {
 		wordMap = new HashMap<String, List<String>>();
 		ObjectMapper mapper = new ObjectMapper();
+		ClassLoader classLoader = RandomWordUtil.class.getClassLoader();
 		try {
-			String[] animalsArr = mapper.readValue(new File("src/main/resources/animals.json"), String[].class);
+			String[] animalsArr = mapper.readValue(convertStreamToString("animals.json", classLoader), String[].class);
 			wordMap.put(animal, Arrays.asList(animalsArr));
-			String[] adjBadArr = mapper.readValue(new File("src/main/resources/adjBad.json"), String[].class);
+			String[] adjBadArr = mapper.readValue(convertStreamToString("adjBad.json", classLoader), String[].class);
 			wordMap.put(adjBad, Arrays.asList(adjBadArr));
-			String[] adjBaderArr = mapper.readValue(new File("src/main/resources/adjBader.json"), String[].class);
+			String[] adjBaderArr = mapper.readValue(convertStreamToString("adjBader.json", classLoader), String[].class);
 			wordMap.put(adjBader, Arrays.asList(adjBaderArr));
-			String[] verbArr = mapper.readValue(new File("src/main/resources/verbs.json"), String[].class);
+			String[] verbArr = mapper.readValue(convertStreamToString("verbs.json", classLoader), String[].class);
 			wordMap.put(verb, Arrays.asList(verbArr));
 		} catch (IOException e) {
 			System.out.println("Error on RandomWordUtil Init: " + e.getMessage());
 		}
 	}
+	
+	
 	
 	/**
 	 * returns a random animal
@@ -103,6 +110,27 @@ public final class RandomWordUtil {
 	private static String randomWordFromList(List<String> lsOfWords) {
 		int index = random.nextInt(lsOfWords.size());
 		return lsOfWords.get(index);
+	}
+	
+	/**
+	 * @param is
+	 * @return
+	 */
+	private static String convertStreamToString(String fileName, ClassLoader classLoader) {
+		InputStream inputStream = classLoader.getResourceAsStream(fileName);
+		if (inputStream == null) {
+			inputStream = classLoader.getResourceAsStream("resources/" + fileName);
+		}
+		String theString = "";
+		try {
+			theString = IOUtils.toString(inputStream, "UTF-8");
+		} catch (Exception e) {
+			System.out.println("Error Converting InputStream");
+			e.printStackTrace();
+		}
+		IOUtils.closeQuietly(inputStream);
+		return theString;
+
 	}
 
 }
