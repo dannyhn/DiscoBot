@@ -52,7 +52,7 @@ public final class InsultUtil {
 		case 2:
 			return String.format("my %3$s %2$s can play better than %1$s", name, RandomWordUtil.randomAnimal(), RandomWordUtil.randomAdjBad()); //Danny
 		case 3:
-			return String.format("%1$s is %2$s than a %3$s %4$", name, RandomWordUtil.randomAdjBader(), RandomWordUtil.randomAdjBad(), RandomWordUtil.randomAnimal()); //Danny
+			return String.format("%1$s is %2$s than a %3$s %4$s", name, RandomWordUtil.randomAdjBader(), RandomWordUtil.randomAdjBad(), RandomWordUtil.randomAnimal()); //Danny
 		case 4:
 			return String.format("%1$s cant %2$s", name, RandomWordUtil.randomVerb());		
 		case 5:
