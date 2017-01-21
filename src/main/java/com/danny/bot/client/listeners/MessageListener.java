@@ -31,7 +31,7 @@ public class MessageListener {
 	 * @throws Exception
 	 */
 	@EventSubscriber
-	public void onMessageReceivedEvent(MessageReceivedEvent event) throws Exception {
+	public void onMessageReceivedEvent(MessageReceivedEvent event) {
 		System.out.println("Message Received: " + event.getMessage());
 		IMessage message = event.getMessage();
 		MessageHandlerFactory handlerFactory = new MessageHandlerFactory();
