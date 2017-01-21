@@ -2,7 +2,7 @@ package com.danny.bot;
 
 import com.danny.bot.client.constants.ClientConstants;
 import com.danny.bot.client.listeners.MessageListener;
-import com.danny.bot.client.util.ClientLoginUtil;
+import com.danny.bot.util.ClientLoginUtil;
 
 import sx.blah.discord.api.IDiscordClient;
 import sx.blah.discord.api.events.EventDispatcher;

@@ -1,4 +1,4 @@
-package com.danny.bot.client.util;
+package com.danny.bot.util;
 
 import sx.blah.discord.api.ClientBuilder;
 import sx.blah.discord.api.IDiscordClient;

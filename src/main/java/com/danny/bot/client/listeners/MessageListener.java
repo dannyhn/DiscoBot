@@ -33,7 +33,6 @@ public class MessageListener {
 	    IGuild currentGuild = message.getGuild();
 	    IChannel currentChannel = message.getChannel();
 	    List<IUser> usersMentioned = message.getMentions();
-	    //message.reply(nameOfAuthor + " likes cows");
 	    
 	    Optional<String> optionalName;
 	    String name;
@@ -46,6 +45,8 @@ public class MessageListener {
 	    	}//TODO add delay for spammers
 	    	if (!name.equalsIgnoreCase(ClientConstants.BOTNAME)) {
 	    		currentChannel.sendMessage(name + " likes cows");
+	    	} else {
+	    		message.reply(message.getAuthor().getName() + " sucks cows");
 	    	}
 	    }
 	    
