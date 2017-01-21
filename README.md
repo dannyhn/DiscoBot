@@ -1,4 +1,4 @@
-# DiscoBot
+# DannyBot
 Discord Bot Created by Danny N.
 
 The bot is under construction.
