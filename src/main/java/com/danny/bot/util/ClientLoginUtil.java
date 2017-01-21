@@ -12,6 +12,11 @@ import sx.blah.discord.util.DiscordException;
  */
 public final class ClientLoginUtil {
 
+	/**
+	 * @param token
+	 * @param login
+	 * @return
+	 */
 	public static IDiscordClient createClient(String token, boolean login) { 
 	    ClientBuilder clientBuilder = new ClientBuilder(); 
 	    clientBuilder.withToken(token);

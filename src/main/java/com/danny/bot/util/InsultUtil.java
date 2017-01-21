@@ -10,8 +10,15 @@ import java.util.Random;
  */
 public final class InsultUtil {
 
+	/**
+	 * 
+	 */
 	private static Random random = new Random();
 	
+	/**
+	 * @param name
+	 * @return
+	 */
 	public static String getInsult(String name) {
 		int randNum = random.nextInt(9);
 		switch(randNum) {
@@ -32,7 +39,7 @@ public final class InsultUtil {
 		case 7:
 			return name + " needs help";
 		case 8:
-			return "Good Clothes. Visit: http://www.milleniumbrand.com/";
+			return "someone should call a doctor, " + name + " has a severe burn";
 		default:
 			return name + " likes cows";
 			

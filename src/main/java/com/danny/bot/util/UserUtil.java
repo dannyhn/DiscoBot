@@ -11,6 +11,11 @@ import sx.blah.discord.handle.obj.IUser;
  */
 public final class UserUtil {
 
+	/**
+	 * @param user
+	 * @param guild
+	 * @return
+	 */
 	public static String getName(IUser user, IGuild guild) {
 
 		Optional<String> optionalName;
