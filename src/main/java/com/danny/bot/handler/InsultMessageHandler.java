@@ -4,9 +4,9 @@ import java.util.List;
 
 import com.danny.bot.client.constants.ClientConstants;
 import com.danny.bot.util.InsultUtil;
+import com.danny.bot.util.MessageUtil;
 import com.danny.bot.util.UserUtil;
 
-import sx.blah.discord.handle.obj.IChannel;
 import sx.blah.discord.handle.obj.IGuild;
 import sx.blah.discord.handle.obj.IMessage;
 import sx.blah.discord.handle.obj.IUser;
@@ -19,15 +19,21 @@ import sx.blah.discord.handle.obj.IUser;
  */
 public class InsultMessageHandler implements MessageHandler {
 
+	@Override
+	public void handleMessage(IMessage message) {
+		String messageToSend = getInsultFromMessage(message);
+		MessageUtil.sendMessage(message.getChannel(), messageToSend, message, true);
+
+	}
+	
 	/**
-	 * Sends insult based off message
+	 * Gets insult based off message
 	 * 
 	 * @param message
 	 * @throws Exception
 	 */
-	private void sendsInsult(IMessage message) throws Exception {
+	private String getInsultFromMessage(IMessage message) {
 		IGuild currentGuild = message.getGuild();
-		IChannel currentChannel = message.getChannel();
 		List<IUser> usersMentioned = message.getMentions();
 
 		String name;
@@ -41,21 +47,10 @@ public class InsultMessageHandler implements MessageHandler {
 				messageToSend += UserUtil.getName(message.getAuthor(), currentGuild) + " sucks cows\n";
 			}
 		}
-		if (!messageToSend.equals("")) {
-			currentChannel.sendMessage(messageToSend);
-		}
+		return messageToSend;
 	}
 
-	@Override
-	public void handleMessage(IMessage message) {
-		try {
-			sendsInsult(message);
-			message.delete();
-		} catch (Exception e) {
-			System.out.println("Error Handling Insult Message: " + message.getContent()  + " " + e.getMessage());
-			//e.printStackTrace();
-		}
-	}
+
 
 	
 }

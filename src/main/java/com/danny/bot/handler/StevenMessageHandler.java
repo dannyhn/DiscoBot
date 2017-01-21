@@ -1,11 +1,9 @@
 package com.danny.bot.handler;
 
+import com.danny.bot.util.MessageUtil;
+
 import sx.blah.discord.handle.obj.IChannel;
 import sx.blah.discord.handle.obj.IMessage;
-import sx.blah.discord.util.DiscordException;
-import sx.blah.discord.util.MissingPermissionsException;
-import sx.blah.discord.util.RateLimitException;
-
 
 /**
  * Message Handler for Steven
@@ -21,15 +19,8 @@ public class StevenMessageHandler implements MessageHandler {
 
 		String messageToSend = "Good Clothes. Visit: http://www.milleniumbrand.com/";
 
-		try {
-			currentChannel.sendMessage(messageToSend);
-			message.delete();
-		} catch (MissingPermissionsException | RateLimitException | DiscordException e) {
-			//e.printStackTrace();
-			System.out.println("Error Handling Steven Message: " + message.getContent()  + " " + e.getMessage());
-		}
-			
-			
+		MessageUtil.sendMessage(currentChannel, messageToSend, message, true);
+
 		// "Good Clothes. Visit: http://www.milleniumbrand.com/";
 	}
 

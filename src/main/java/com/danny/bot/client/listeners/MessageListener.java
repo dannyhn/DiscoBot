@@ -3,7 +3,6 @@ package com.danny.bot.client.listeners;
 import com.danny.bot.handler.MessageHandler;
 import com.danny.bot.handler.factory.MessageHandlerFactory;
 
-import sx.blah.discord.api.IDiscordClient;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
 import sx.blah.discord.handle.impl.events.ReadyEvent;
