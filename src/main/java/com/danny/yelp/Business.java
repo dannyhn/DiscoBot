@@ -31,6 +31,10 @@ public class Business {
 			this.url = url;
 	}
 	
+	public String getName() {
+		return name;
+	}
+	
 	@Override
 	public String toString() {
 		String result = "Restaurant: " + name + "\n";
@@ -38,5 +42,15 @@ public class Business {
 		result += "Rating: " + rating + "\n";
 		result += "Url: " + url;
 		return result;
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if (other instanceof Business) {
+			Business otherBusiness = (Business) other;
+			return getName().equals(otherBusiness.getName());
+		} else {
+			return false;
+		}
 	}
 }

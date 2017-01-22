@@ -1,6 +1,7 @@
 package com.danny.yelp;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,7 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class YelpAPI {
 
 	private static final String API_HOST = "api.yelp.com";
-	private static final int SEARCH_LIMIT = 3;
+	private static final int SEARCH_LIMIT = 10;
 	private static final String SEARCH_PATH = "/v2/search";
 
 	OAuthService service;
@@ -101,7 +102,8 @@ public class YelpAPI {
 			JsonNode rootNode = mapper.readValue(searchResponseJSON, JsonNode.class);
 			rootNode = rootNode.get("businesses");
 			Business[] business = mapper.treeToValue(rootNode, Business[].class);
-			return Arrays.asList(business);
+			List<Business> lsOfBusiness = new ArrayList<>(Arrays.asList(business));
+			return lsOfBusiness;
 		} catch (IOException e) {
 			System.out.println("Error Query Yelp API: " + e.getMessage());
 		}
