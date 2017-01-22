@@ -6,6 +6,9 @@ import sx.blah.discord.handle.obj.IMessage;
 public final class MessageUtil {
 
 	public static void sendMessage(IChannel channel, String message, IMessage original, boolean delete) {
+		if (message == null) {
+			return;
+		}
 		try {
 			channel.sendMessage(message);
 			if (delete) {

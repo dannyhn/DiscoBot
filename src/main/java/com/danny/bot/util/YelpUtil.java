@@ -34,6 +34,24 @@ public class YelpUtil {
 		return randomBusiness.toString();
 	}
 	
+	public static String getYelpListInfoFromZipCode(String zipcode) {
+		if (yelp == null || cache == null) {
+			yelp = new YelpAPI(YelpConstants.CONSUMER_KEY, YelpConstants.CONSUMER_SECRET, YelpConstants.TOKEN, YelpConstants.TOKEN_SECRET);
+			cache = new KittyCache<String, List<Business>>(100);
+		}
+		List<Business> business = getBusinessFromZipCode(zipcode);
+		if (business == null) {
+			return "No Restaurant found";
+		}
+		String result = "";
+		int index = 0;
+		for (Business restaurant : business) {
+			result += index++ + ") " + restaurant.getName() + "\n";
+		}
+		ContextUtil.addBusiness(business);
+		return result;
+	}
+	
 	private static Business randomBusinessFromList(List<Business> lsOfWords) {
 		int index = random.nextInt(lsOfWords.size());
 		return lsOfWords.get(index);

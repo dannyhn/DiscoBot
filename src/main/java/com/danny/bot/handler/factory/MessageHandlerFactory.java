@@ -1,5 +1,6 @@
 package com.danny.bot.handler.factory;
 
+import com.danny.bot.handler.ContextMessageHandler;
 import com.danny.bot.handler.InsultMessageHandler;
 import com.danny.bot.handler.MessageHandler;
 import com.danny.bot.handler.StevenMessageHandler;
@@ -26,7 +27,7 @@ public class MessageHandlerFactory {
 		} else if (message.getContent().toLowerCase().startsWith(".yelp"))  {
 			return new YelpMessageHandler();
 		} else {
-			return null;
+			return new ContextMessageHandler();
 		}
 
 	}

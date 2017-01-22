@@ -104,7 +104,7 @@ public class YelpAPI {
 			Business[] business = mapper.treeToValue(rootNode, Business[].class);
 			List<Business> lsOfBusiness = new ArrayList<>(Arrays.asList(business));
 			return lsOfBusiness;
-		} catch (IOException e) {
+		} catch (IOException | NullPointerException e) {
 			System.out.println("Error Query Yelp API: " + e.getMessage());
 		}
 		return null;
