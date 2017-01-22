@@ -15,7 +15,7 @@ public class YelpMessageHandler implements MessageHandler{
 
 	@Override
 	public void handleMessage(IMessage message) {
-		if (message.getContent().contains(".yelplist")) {
+		if (message.getContent().toLowerCase().contains(".yelplist")) {
 			handleYelpListMessage(message);
 		} else {
 			handleYelpMessage(message);

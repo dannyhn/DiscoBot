@@ -72,7 +72,7 @@ public final class InsultUtil {
 	 * @return
 	 */
 	private static String staticInsult(String name) {
-		int randNum = random.nextInt(7);
+		int randNum = random.nextInt(9);
 		switch(randNum) {
 		case 0:
 			return name + " why you so poop"; //Danny
@@ -88,6 +88,10 @@ public final class InsultUtil {
 			return name + " needs help"; //Tiffany
 		case 6:
 			return "someone should call a doctor, " + name + " has a severe burn"; //Tiffany
+		case 7:
+			return name + " plays like a sissy";
+		case 8 :
+			return name + " hides under the map";
 		default:
 			return name + " likes cows";
 			
