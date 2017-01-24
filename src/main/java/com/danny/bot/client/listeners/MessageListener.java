@@ -2,6 +2,8 @@ package com.danny.bot.client.listeners;
 
 import com.danny.bot.handler.MessageHandler;
 import com.danny.bot.handler.factory.MessageHandlerFactory;
+import com.danny.bot.service.RandomWordService;
+
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
 import sx.blah.discord.handle.impl.events.ReadyEvent;
@@ -20,8 +22,7 @@ public class MessageListener {
 	 */
 	@EventSubscriber
 	public void onReadyEvent(ReadyEvent event) {
-		System.out.println("Ready Received");
-		System.out.println("Ready: " + event.toString());
+		RandomWordService.getInstance();
 	}
 
 	/**
@@ -31,12 +32,13 @@ public class MessageListener {
 	 * @throws Exception
 	 */
 	@EventSubscriber
-	public void onMessageReceivedEvent(MessageReceivedEvent event) throws Exception {
-		System.out.println("Message Received: " + event.getMessage());
+	public void onMessageReceivedEvent(MessageReceivedEvent event) {
 		IMessage message = event.getMessage();
 		MessageHandlerFactory handlerFactory = new MessageHandlerFactory();
 		MessageHandler handler = handlerFactory.getMessageHandler(message);
-		handler.handleMessage(message);
+		if (handler != null) {
+			handler.handleMessage(message);
+		}
 
 	}
 
