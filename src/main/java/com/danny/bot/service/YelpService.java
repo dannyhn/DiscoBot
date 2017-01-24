@@ -1,4 +1,4 @@
-package com.danny.bot.util;
+package com.danny.bot.service;
 
 import java.util.List;
 import java.util.Random;
@@ -13,14 +13,28 @@ import com.danny.yelp.YelpConstants;
  * @author Danny
  *
  */
-public class YelpUtil {
+public class YelpService {
 	
-	private static KCache<String, List<Business>> cache;
+	private KCache<String, List<Business>> cache;
 	
-	private static YelpAPI yelp;
-	private static Random random = new Random();
+	private YelpAPI yelp;
+	private Random random = new Random();
+	
+	private static YelpService yelpService;
+	
+	/**
+	 *  Way to get singleton instance
+	 * 
+	 * @return
+	 */
+	public static synchronized YelpService getInstance() {
+		if (yelpService == null) {
+			yelpService = new YelpService();
+		}
+		return yelpService;
+	}
 
-	public static String getYelpInfoFromZipCode(String zipcode) {
+	public String getYelpInfoFromZipCode(String zipcode) {
 		if (yelp == null || cache == null) {
 			yelp = new YelpAPI(YelpConstants.CONSUMER_KEY, YelpConstants.CONSUMER_SECRET, YelpConstants.TOKEN, YelpConstants.TOKEN_SECRET);
 			cache = new KittyCache<String, List<Business>>(100);
@@ -34,7 +48,7 @@ public class YelpUtil {
 		return randomBusiness.toString();
 	}
 	
-	public static String getYelpListInfoFromZipCode(String zipcode) {
+	public String getYelpListInfoFromZipCode(String zipcode) {
 		if (yelp == null || cache == null) {
 			yelp = new YelpAPI(YelpConstants.CONSUMER_KEY, YelpConstants.CONSUMER_SECRET, YelpConstants.TOKEN, YelpConstants.TOKEN_SECRET);
 			cache = new KittyCache<String, List<Business>>(100);
@@ -48,11 +62,11 @@ public class YelpUtil {
 		for (Business restaurant : business) {
 			result += index++ + ") " + restaurant.getName() + "\n";
 		}
-		ContextUtil.addBusiness(business);
+		ContextService.getInstance().addBusiness(business);
 		return result;
 	}
 	
-	private static Business randomBusinessFromList(List<Business> lsOfWords) {
+	private Business randomBusinessFromList(List<Business> lsOfWords) {
 		int index = random.nextInt(lsOfWords.size());
 		return lsOfWords.get(index);
 	}
@@ -64,7 +78,7 @@ public class YelpUtil {
 	 * @param zipcode
 	 * @return
 	 */
-	private static List<Business> getBusinessFromZipCode(String zipcode) {
+	private List<Business> getBusinessFromZipCode(String zipcode) {
 		List<Business> business = cache.get(zipcode);
 		if (business == null) {
 			business = yelp.queryAPI(zipcode);
@@ -76,7 +90,7 @@ public class YelpUtil {
 
 	}
 	
-	private static void removeEntry(String zipcode, Business businessToDelete) {
+	private void removeEntry(String zipcode, Business businessToDelete) {
 		List<Business> business = cache.get(zipcode);
 		if (business != null) {
 			business.remove(businessToDelete);
@@ -84,6 +98,10 @@ public class YelpUtil {
 				cache.remove(zipcode);
 			}
 		}
+	}
+	
+	private YelpService() {
+		
 	}
 	
 }

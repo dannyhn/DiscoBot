@@ -1,7 +1,7 @@
 package com.danny.bot.handler;
 
+import com.danny.bot.service.YelpService;
 import com.danny.bot.util.MessageUtil;
-import com.danny.bot.util.YelpUtil;
 
 import sx.blah.discord.handle.obj.IMessage;
 
@@ -30,7 +30,7 @@ public class YelpMessageHandler implements MessageHandler{
 	private void handleYelpMessage(IMessage message) {
 		String zipcode = message.getContent().replaceAll(".yelp", "");
 		zipcode = zipcode.trim();
-		String restaurant = YelpUtil.getYelpInfoFromZipCode(zipcode);
+		String restaurant = YelpService.getInstance().getYelpInfoFromZipCode(zipcode);
 		MessageUtil.sendMessage(message.getChannel(), restaurant, message, false);
 	}
 	
@@ -42,7 +42,7 @@ public class YelpMessageHandler implements MessageHandler{
 	private void handleYelpListMessage(IMessage message) {
 		String zipcode = message.getContent().replaceAll(".yelplist", "");
 		zipcode = zipcode.trim();
-		String restaurant = YelpUtil.getYelpListInfoFromZipCode(zipcode);
+		String restaurant = YelpService.getInstance().getYelpListInfoFromZipCode(zipcode);
 		MessageUtil.sendMessage(message.getChannel(), restaurant, message, false);
 	}
 

@@ -2,7 +2,7 @@ package com.danny.bot.client.listeners;
 
 import com.danny.bot.handler.MessageHandler;
 import com.danny.bot.handler.factory.MessageHandlerFactory;
-import com.danny.bot.util.RandomWordUtil;
+import com.danny.bot.service.RandomWordService;
 
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
@@ -22,7 +22,7 @@ public class MessageListener {
 	 */
 	@EventSubscriber
 	public void onReadyEvent(ReadyEvent event) {
-		RandomWordUtil.init();
+		RandomWordService.getInstance();
 	}
 
 	/**
