@@ -90,9 +90,9 @@ public final class InsultUtil {
 		case 6:
 			return "someone should call a doctor, " + name + " has a severe burn"; //Tiffany
 		case 7:
-			return name + " plays like a sissy";
-		case 8 :
-			return name + " hides under the map";
+			return name + " plays like a sissy"; // Danny
+		case 8:
+			return name + " hides under the map"; // Danny
 		default:
 			return name + " likes cows";
 			
