@@ -13,3 +13,4 @@ public final class ClientConstants {
 	public static final String BOTNAME = "DannyBot";
 	
 }
+ 
