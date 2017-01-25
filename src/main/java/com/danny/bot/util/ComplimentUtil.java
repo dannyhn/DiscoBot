@@ -86,7 +86,7 @@ public class ComplimentUtil {
 		case 4:
 			return name + " is an adorable cinnamon roll."; //Tiffany
 		case 5:
-			return name + " is love. " + name + "is life. <3"; //Tiffany
+			return name + " is love. " + name + " is life. <3"; //Tiffany
 		case 6:
 			return name + " is an angel from heaven."; //Tiffany
 		case 7:
