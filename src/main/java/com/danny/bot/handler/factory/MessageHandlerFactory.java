@@ -1,5 +1,6 @@
 package com.danny.bot.handler.factory;
 
+import com.danny.bot.handler.ComplimentMessageHandler;
 import com.danny.bot.handler.ContextMessageHandler;
 import com.danny.bot.handler.InsultMessageHandler;
 import com.danny.bot.handler.MessageHandler;
@@ -26,6 +27,8 @@ public class MessageHandlerFactory {
 			return new StevenMessageHandler();
 		} else if (message.getContent().toLowerCase().startsWith(".yelp"))  {
 			return new YelpMessageHandler();
+		} else if (message.getContent().toLowerCase().startsWith(".c")){
+			return new ComplimentMessageHandler();
 		} else {
 			return new ContextMessageHandler();
 		}
