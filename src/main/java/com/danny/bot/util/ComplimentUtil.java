@@ -2,8 +2,13 @@ package com.danny.bot.util;
 
 import java.util.Random;
 
+
 import com.danny.bot.service.RandomWordService;
 
+ /**
+ * @author Tiffany
+ *
+ */
 public class ComplimentUtil {
 
 	
