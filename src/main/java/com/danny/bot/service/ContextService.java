@@ -6,6 +6,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.danny.yelp.Business;
 
+/**
+ * @author Danny
+ *
+ */
 public final class ContextService {
 
 	private Map<Integer, Business> contextYelpMap;

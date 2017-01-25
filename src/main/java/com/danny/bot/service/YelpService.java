@@ -7,7 +7,7 @@ import com.danny.cache.KCache;
 import com.danny.cache.KittyCache;
 import com.danny.yelp.Business;
 import com.danny.yelp.YelpAPI;
-//import com.danny.yelp.YelpConstants;
+import com.danny.yelp.YelpConstants;
 
 /**
  * @author Danny
@@ -36,8 +36,8 @@ public class YelpService {
 
 	public String getYelpInfoFromZipCode(String zipcode) {
 		if (yelp == null || cache == null) {
-			yelp = new YelpAPI("", "", "", "");
-			//yelp = new YelpAPI(YelpConstants.CONSUMER_KEY, YelpConstants.CONSUMER_SECRET, YelpConstants.TOKEN, YelpConstants.TOKEN_SECRET);
+			//yelp = new YelpAPI("", "", "", "");
+			yelp = new YelpAPI(YelpConstants.CONSUMER_KEY, YelpConstants.CONSUMER_SECRET, YelpConstants.TOKEN, YelpConstants.TOKEN_SECRET);
 			cache = new KittyCache<String, List<Business>>(100);
 		}
 		List<Business> business = getBusinessFromZipCode(zipcode);
@@ -51,8 +51,8 @@ public class YelpService {
 	
 	public String getYelpListInfoFromZipCode(String zipcode) {
 		if (yelp == null || cache == null) {
-			yelp = new YelpAPI("", "", "", "");
-			//yelp = new YelpAPI(YelpConstants.CONSUMER_KEY, YelpConstants.CONSUMER_SECRET, YelpConstants.TOKEN, YelpConstants.TOKEN_SECRET);
+			//yelp = new YelpAPI("", "", "", "");
+			yelp = new YelpAPI(YelpConstants.CONSUMER_KEY, YelpConstants.CONSUMER_SECRET, YelpConstants.TOKEN, YelpConstants.TOKEN_SECRET);
 			cache = new KittyCache<String, List<Business>>(100);
 		}
 		List<Business> business = getBusinessFromZipCode(zipcode);
