@@ -8,6 +8,7 @@ import com.danny.bot.service.RateLimitingService;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
 import sx.blah.discord.handle.impl.events.ReadyEvent;
+import sx.blah.discord.handle.impl.events.StatusChangeEvent;
 import sx.blah.discord.handle.obj.IMessage;
 
 /**
@@ -24,6 +25,11 @@ public class MessageListener {
 	@EventSubscriber
 	public void onReadyEvent(ReadyEvent event) {
 		RandomWordService.getInstance();
+	}
+	
+	@EventSubscriber
+	public void onStatusChangeEvent(StatusChangeEvent event) {
+		System.out.println("Status: " + event.getNewStatus().getStatusMessage());
 	}
 
 	/**

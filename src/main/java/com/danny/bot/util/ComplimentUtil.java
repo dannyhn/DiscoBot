@@ -20,7 +20,7 @@ public class ComplimentUtil {
 	 */
 	public static synchronized String getCompliment(String name) {
 		Random random = new Random();
-		int randNum = random.nextInt(2);
+		int randNum = random.nextInt(1);
 		switch(randNum) {
 		case 0:
 			return staticCompliment(name); // Tiffany
