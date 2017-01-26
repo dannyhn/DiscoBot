@@ -1,7 +1,9 @@
 package com.danny.bot.client.listeners;
 
+import com.danny.bot.handler.ContextMessageHandler;
 import com.danny.bot.handler.MessageHandler;
 import com.danny.bot.handler.factory.MessageHandlerFactory;
+import com.danny.bot.service.ContextService;
 import com.danny.bot.service.RandomWordService;
 import com.danny.bot.service.RateLimitingService;
 
@@ -41,14 +43,24 @@ public class MessageListener {
 	@EventSubscriber
 	public void onMessageReceivedEvent(MessageReceivedEvent event) {
 		IMessage message = event.getMessage();
-		if (RateLimitingService.getInstance().canMakeRequest(message.getAuthor().getID())) {
-			MessageHandlerFactory handlerFactory = new MessageHandlerFactory();
-			MessageHandler handler = handlerFactory.getMessageHandler(message);
-			if (handler != null) {
-				handler.handleMessage(message);
-			}
+		MessageHandlerFactory handlerFactory = new MessageHandlerFactory();
+		MessageHandler handler = handlerFactory.getMessageHandler(message);
+		if (isValidCommand(handler, message) && canMakeRequest(message)) {
+			handler.handleMessage(message);
 		}
 
+	}
+	
+	private boolean isValidCommand(MessageHandler handler, IMessage message) {
+		if (handler instanceof ContextMessageHandler)  {
+			return ContextService.getInstance().getContext(message.getContent()) != null;
+		} else {
+			return true;
+		}
+	}
+	
+	private boolean canMakeRequest(IMessage message) {
+		return RateLimitingService.getInstance().canMakeRequest(message.getAuthor().getID());
 	}
 
 }
