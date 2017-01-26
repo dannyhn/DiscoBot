@@ -2,6 +2,7 @@ package com.danny.bot.client.listeners;
 
 import com.danny.bot.handler.ContextMessageHandler;
 import com.danny.bot.handler.MessageHandler;
+import com.danny.bot.handler.StatusChangeHandler;
 import com.danny.bot.handler.factory.MessageHandlerFactory;
 import com.danny.bot.service.ContextService;
 import com.danny.bot.service.RandomWordService;
@@ -12,6 +13,7 @@ import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
 import sx.blah.discord.handle.impl.events.ReadyEvent;
 import sx.blah.discord.handle.impl.events.StatusChangeEvent;
 import sx.blah.discord.handle.obj.IMessage;
+import sx.blah.discord.handle.obj.Status;
 
 /**
  * @author Danny
@@ -31,7 +33,8 @@ public class MessageListener {
 	
 	@EventSubscriber
 	public void onStatusChangeEvent(StatusChangeEvent event) {
-		System.out.println("Status: " + event.getNewStatus().getStatusMessage());
+		StatusChangeHandler statueChangeHandler = new StatusChangeHandler();
+		statueChangeHandler.handleStatusChangeEvent(event.getNewStatus());
 	}
 
 	/**
