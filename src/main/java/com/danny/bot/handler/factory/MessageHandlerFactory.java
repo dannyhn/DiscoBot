@@ -4,6 +4,7 @@ import com.danny.bot.handler.ComplimentMessageHandler;
 import com.danny.bot.handler.ContextMessageHandler;
 import com.danny.bot.handler.InsultMessageHandler;
 import com.danny.bot.handler.MessageHandler;
+import com.danny.bot.handler.QuoteMessageHandler;
 import com.danny.bot.handler.StevenMessageHandler;
 import com.danny.bot.handler.YelpMessageHandler;
 
@@ -29,6 +30,8 @@ public class MessageHandlerFactory {
 			return new YelpMessageHandler();
 		} else if (message.getContent().toLowerCase().startsWith(".c")){
 			return new ComplimentMessageHandler();
+		} else if (message.getContent().toLowerCase().startsWith(".quote")){
+			return new QuoteMessageHandler();
 		} else {
 			return new ContextMessageHandler();
 		}

@@ -24,7 +24,8 @@ public final class RandomWordService {
 	private final String animal = "animal";
 	private final String adjBad = "adjBad";
 	private final String adjBader = "adjBader";
-	private final String verb = "verb";
+	private final String verb = "verb";	
+	private final String quote = "quote";
 	
 	private static RandomWordService randomWordService;
 	
@@ -94,6 +95,19 @@ public final class RandomWordService {
 	}
 	
 	/**
+	 * returns a random verb
+	 * 
+	 * @return
+	 */
+	public String randomQuote() {
+		if (wordMap.containsKey(quote)) {
+			return randomWordFromList(wordMap.get(quote));
+		} else {
+			return "Oh my god, girls are the cows of people";
+		}
+	}
+	
+	/**
 	 * @param lsOfWords
 	 * @return
 	 */
@@ -136,6 +150,8 @@ public final class RandomWordService {
 			wordMap.put(adjBader, Arrays.asList(adjBaderArr));
 			String[] verbArr = mapper.readValue(convertStreamToString("verbs.json", classLoader), String[].class);
 			wordMap.put(verb, Arrays.asList(verbArr));
+			String[] quoteArr = mapper.readValue(convertStreamToString("quotes.json", classLoader), String[].class);
+			wordMap.put(quote, Arrays.asList(quoteArr));
 		} catch (IOException e) {
 			System.out.println("Error on RandomWordUtil Init: " + e.getMessage());
 		}
