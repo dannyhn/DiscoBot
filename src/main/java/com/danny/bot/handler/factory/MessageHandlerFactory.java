@@ -2,6 +2,7 @@ package com.danny.bot.handler.factory;
 
 import com.danny.bot.handler.ComplimentMessageHandler;
 import com.danny.bot.handler.ContextMessageHandler;
+import com.danny.bot.handler.HelpMessageHandler;
 import com.danny.bot.handler.InsultMessageHandler;
 import com.danny.bot.handler.MessageHandler;
 import com.danny.bot.handler.QuoteMessageHandler;
@@ -32,6 +33,8 @@ public class MessageHandlerFactory {
 			return new ComplimentMessageHandler();
 		} else if (message.getContent().toLowerCase().startsWith(".quote")){
 			return new QuoteMessageHandler();
+		} else if (message.getContent().toLowerCase().startsWith(".help")){
+			return new HelpMessageHandler();
 		} else {
 			return new ContextMessageHandler();
 		}
