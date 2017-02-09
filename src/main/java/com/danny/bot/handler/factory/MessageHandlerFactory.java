@@ -3,6 +3,7 @@ package com.danny.bot.handler.factory;
 import com.danny.bot.handler.ComplimentMessageHandler;
 import com.danny.bot.handler.ContextMessageHandler;
 import com.danny.bot.handler.HelpMessageHandler;
+import com.danny.bot.handler.InfoMessageHandler;
 import com.danny.bot.handler.InsultMessageHandler;
 import com.danny.bot.handler.MessageHandler;
 import com.danny.bot.handler.QuoteMessageHandler;
@@ -23,18 +24,20 @@ public class MessageHandlerFactory {
 	 * @return
 	 */
 	public MessageHandler getMessageHandler(IMessage message) {
-		if (message.getContent().startsWith(".i")) {
-			return new InsultMessageHandler();
+		if (message.getContent().startsWith(".info")) {
+			return new InfoMessageHandler();
 		} else if (message.getContent().toLowerCase().startsWith(".steven")) {
 			return new StevenMessageHandler();
-		} else if (message.getContent().toLowerCase().startsWith(".yelp"))  {
+		} else if (message.getContent().toLowerCase().startsWith(".yelp")) {
 			return new YelpMessageHandler();
-		} else if (message.getContent().toLowerCase().startsWith(".c")){
+		} else if (message.getContent().toLowerCase().startsWith(".c")) {
 			return new ComplimentMessageHandler();
-		} else if (message.getContent().toLowerCase().startsWith(".quote")){
+		} else if (message.getContent().toLowerCase().startsWith(".quote")) {
 			return new QuoteMessageHandler();
-		} else if (message.getContent().toLowerCase().startsWith(".help")){
+		} else if (message.getContent().toLowerCase().startsWith(".help")) {
 			return new HelpMessageHandler();
+		} else if (message.getContent().toLowerCase().startsWith(".i")) {
+			return new InsultMessageHandler();
 		} else {
 			return new ContextMessageHandler();
 		}
