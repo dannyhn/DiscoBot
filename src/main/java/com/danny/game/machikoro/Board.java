@@ -1,14 +1,18 @@
 package com.danny.game.machikoro;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * @author Danny
  *
  */
-public class Board {
+public final class Board {
+	
+	private static Board board;
 	
 	private int playerTurn;
 	private int turnPhase;
@@ -18,13 +22,53 @@ public class Board {
 	
 	private int bankMoney;
 	
+	public static synchronized Board getInstance() {
+		if (board == null) {
+			board = new Board();
+		}
+		return board;
+	}
+	
 	public Board() {
 		bankMoney = 2000;
 		initCardMap();
+		playerTurn = 0;
+		turnPhase = 0;
+		players = new ArrayList<>();
+	}
+	
+	public void addPlayer(String playerId, String name) {
+		for (Player player : players) {
+			if (player.getPlayerId().equalsIgnoreCase(playerId)) {
+				return;
+			}
+		}
+		System.out.println(cardMap.toString());
+		Player newPlayer = new Player(playerId,name , 5, new ArrayList<>());
+		newPlayer.purchaseCard(cardMap.get("WheatField"));
+		newPlayer.purchaseCard(cardMap.get("Bakery"));
+		players.add(newPlayer);
+	}
+	
+	public String doPlayerRoll(String playerId) {
+		if (canPlayerRoll(playerId)) {
+			int roll = roll();
+			Player player = getPlayer(playerId);
+			List<Player> others = getOthers();
+			String msg = earnIncome(roll, player, others);
+			
+			return player.getName() + " rolled a " + roll + "\n" + msg;
+		}
+		return "Player could not Roll";
+	}
+	
+	public int roll() {
+		Random random = new Random();
+		return random.nextInt(6) + 1;
 	}
 	
 	public boolean isPlayerTurn(String playerId) {
-		return players.get(playerTurn).getPlayerId().equalsIgnoreCase(playerId);
+		return playerTurn < players.size() && players.get(playerTurn).getPlayerId().equalsIgnoreCase(playerId);
 	}
 	
 	public Player getPlayer(String playerId) {
@@ -36,15 +80,25 @@ public class Board {
 		return null;
 	}
 	
+	public List<Player> getOthers() {
+		List<Player> others = new ArrayList<>();
+		for (int i = 0; i < players.size()-1; i++) {
+			others.add(players.get((playerTurn + 1 + i) % players.size()));
+		}
+		return others;
+	}
+	
 	public boolean canPlayerRoll(String playerId) {
 		return isPlayerTurn(playerId) && turnPhase == 0;
 	}
 	
-	public void earnIncome(int roll, Player current, List<Player> others) {
-		handleRedCardIncome(roll, current, others);
-		handleBlueCardIncome(roll, current, others);
-		handleGreenCardIncome(roll, current);
-		handlePurpleCardIncome(roll, current, others);
+	public String earnIncome(int roll, Player current, List<Player> others) {
+		String msg = "";
+		msg += handleRedCardIncome(roll, current, others);
+		msg += handleBlueCardIncome(roll, current, others);
+		msg += handleGreenCardIncome(roll, current);
+		msg += handlePurpleCardIncome(roll, current, others);
+		return msg;
 	}
 	
 	public boolean canPurchaseCard(String playerId, String cardName) {
@@ -63,23 +117,26 @@ public class Board {
 		player.purchaseCard(card);
 	}
 	
-	private void handleRedCardIncome(int roll, Player current, List<Player> others) {
+	private String handleRedCardIncome(int roll, Player current, List<Player> others) {
+		String msg = "";
 		for (Player player : others) {
 			for (Card card : player.getCards()) {
 				if (card.isRedCard() && card.isActivated(roll)) {
-					System.out.println("Amount Taken: " + player.takeBasedOffCard(current, card));
+					msg +=  player.getName() + " took " + player.takeBasedOffCard(current, card) + " from " + current.getName() +  " from card " + card.getName() + "\n";
 				}
 			}
 		}
+		return msg;
 	}
 	
-	private void handleBlueCardIncome(int roll, Player current, List<Player> others) {
+	private String handleBlueCardIncome(int roll, Player current, List<Player> others) {
+		String msg = "";
 		int amount;
 		for (Card card : current.getCards()) {
 			if (card.isBlueCard() && card.isActivated(roll)) {
 				amount =  current.cardActivated(card);
 				bankMoney -= amount;
-				System.out.println("Amount Received: " + amount);
+				msg +=  current.getName() + " received " + amount + " from bank from card " + card.getName() + "\n";
 			}
 		}
 		for (Player player : others) {
@@ -87,31 +144,38 @@ public class Board {
 				if (card.isBlueCard() && card.isActivated(roll)) {
 					amount =  player.cardActivated(card);
 					bankMoney -= amount;
-					System.out.println("Amount Received: " + amount);
+					msg +=  player.getName() + " received " + amount + " from bank from card " + card.getName() + "\n";
 				}
 			}
 		}
+		return msg;
 	}
 	
-	private void handleGreenCardIncome(int roll, Player current) {
+	private String handleGreenCardIncome(int roll, Player current) {
+		String msg = "";
 		int amount;
 		for (Card card : current.getCards()) {
 			if (card.isGreenCard() && card.isActivated(roll)) {
 				amount = current.cardActivated(card);
 				bankMoney -= amount;
-				System.out.println("Amount Received: " + amount);
+				msg +=  current.getName() + " received " + amount + " from bank from card " + card.getName() + "\n";
 			}
 		}
+		return msg;
 	}
 	
-	private void handlePurpleCardIncome(int roll, Player current, List<Player> others) {
+	private String handlePurpleCardIncome(int roll, Player current, List<Player> others) {
+		String msg = "";
 		for (Player player : others) {
 			for (Card card : player.getCards()) {
 				if (card.isPurpleCard() && card.isActivated(roll)) {
-					System.out.println("Amount Taken: " + current.takeBasedOffCard(player, card)); //tv station is special
+					//tv station is special
+					msg +=  current.getName() + " took " + player.takeBasedOffCard(current, card) + " from " + player.getName() +  " from card " + card.getName() + "\n";
+
 				}
 			}
 		}
+		return msg;
 	}
 	
 	private void initCardMap() {

@@ -2,6 +2,7 @@ package com.danny.game.machikoro;
 
 import java.util.List;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
@@ -9,9 +10,11 @@ import lombok.Data;
  *
  */
 @Data
+@AllArgsConstructor
 public class Player {
 
 	private String playerId;
+	private String name;
 	private int money;
 	private List<Card> cards;
 	

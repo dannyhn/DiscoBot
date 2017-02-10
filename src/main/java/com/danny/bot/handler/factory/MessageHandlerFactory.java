@@ -6,7 +6,10 @@ import com.danny.bot.handler.HelpMessageHandler;
 import com.danny.bot.handler.InfoMessageHandler;
 import com.danny.bot.handler.InsultMessageHandler;
 import com.danny.bot.handler.MessageHandler;
+import com.danny.bot.handler.PlayerMessageHandler;
 import com.danny.bot.handler.QuoteMessageHandler;
+import com.danny.bot.handler.ReadyMessageHandler;
+import com.danny.bot.handler.RollMessageHandler;
 import com.danny.bot.handler.StevenMessageHandler;
 import com.danny.bot.handler.YelpMessageHandler;
 
@@ -38,6 +41,12 @@ public class MessageHandlerFactory {
 			return new HelpMessageHandler();
 		} else if (message.getContent().toLowerCase().startsWith(".i")) {
 			return new InsultMessageHandler();
+		} else if (message.getContent().toLowerCase().startsWith(".ready")) {
+			return new ReadyMessageHandler();
+		} else if (message.getContent().toLowerCase().startsWith(".roll")) {
+			return new RollMessageHandler();
+		} else if (message.getContent().toLowerCase().startsWith(".playerinfo")) {
+			return new PlayerMessageHandler();
 		} else {
 			return new ContextMessageHandler();
 		}
