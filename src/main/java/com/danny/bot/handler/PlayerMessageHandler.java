@@ -33,7 +33,7 @@ public class PlayerMessageHandler implements MessageHandler {
 	private String getInfo(IUser user, IGuild guild) {
 		Player player = Board.getInstance().getPlayer(user.getID());
 		if (player == null) {
-			return "Could not find Player: " + UserUtil.getName(user, guild);
+			return "Could not find Player: " + UserUtil.getName(user, guild) + "\n";
 		}
 		String msg = "";
 		msg += "Name: " + player.getName() + "\n";

@@ -1,6 +1,7 @@
 package com.danny.game.machikoro;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,11 +44,16 @@ public final class Board {
 				return;
 			}
 		}
+		
 		System.out.println(cardMap.toString());
 		Player newPlayer = new Player(playerId,name , 5, new ArrayList<>());
 		newPlayer.purchaseCard(cardMap.get("WheatField"));
 		newPlayer.purchaseCard(cardMap.get("Bakery"));
 		players.add(newPlayer);
+		
+		if (players.size()  == 1) {
+			initComputer();
+		}
 	}
 	
 	public String doPlayerRoll(String playerId) {
@@ -85,6 +91,7 @@ public final class Board {
 		for (int i = 0; i < players.size()-1; i++) {
 			others.add(players.get((playerTurn + 1 + i) % players.size()));
 		}
+		Collections.reverse(others); //reverse order
 		return others;
 	}
 	
@@ -176,6 +183,13 @@ public final class Board {
 			}
 		}
 		return msg;
+	}
+	
+	private void initComputer() {
+		Player player = new Player("272194101837824001", "DannyBot", 5, new ArrayList<>());
+		player.purchaseCard(cardMap.get("WheatField"));
+		player.purchaseCard(cardMap.get("Bakery"));
+		players.add(player);
 	}
 	
 	private void initCardMap() {
