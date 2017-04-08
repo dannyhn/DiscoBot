@@ -73,7 +73,7 @@ public final class InsultUtil {
 	 */
 	private static synchronized String staticInsult(String name) {
 		Random random = new Random();
-		int randNum = random.nextInt(10);
+		int randNum = random.nextInt(11);
 		switch(randNum) {
 		case 0:
 			return name + " why you so poop"; //Danny
@@ -88,13 +88,15 @@ public final class InsultUtil {
 		case 5:
 			return name + " needs help"; //Tiffany
 		case 6:
-			return "someone should call a doctor, " + name + " has a severe burn"; //Tiffany
+			return name + " gets last hit by creeps"; //Danny
 		case 7:
 			return name + " plays like a sissy"; // Danny
 		case 8:
 			return name + " hides under the map"; // Danny
 		case 9:
-			return name + "programs in BASIC";
+			return name + " programs in BASIC";
+		case 10:
+			return name + " buys 40 minute midas";
 		default:
 			return name + " likes cows";
 			
