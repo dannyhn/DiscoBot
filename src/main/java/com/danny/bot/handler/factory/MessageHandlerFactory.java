@@ -7,6 +7,7 @@ import com.danny.bot.handler.InfoMessageHandler;
 import com.danny.bot.handler.InsultMessageHandler;
 import com.danny.bot.handler.MessageHandler;
 import com.danny.bot.handler.PlayerMessageHandler;
+import com.danny.bot.handler.ProfanityMessageHandler;
 import com.danny.bot.handler.QuoteMessageHandler;
 import com.danny.bot.handler.ReadyMessageHandler;
 import com.danny.bot.handler.RollMessageHandler;
@@ -47,9 +48,15 @@ public class MessageHandlerFactory {
 			return new RollMessageHandler();
 		} else if (message.getContent().toLowerCase().startsWith(".playerinfo")) {
 			return new PlayerMessageHandler();
+		} else if (isProfanity(message)) {
+			return new ProfanityMessageHandler();
 		} else {
 			return new ContextMessageHandler();
 		}
 
+	}
+	
+	private boolean isProfanity(IMessage message) {
+		return message.getContent().toLowerCase().contains("fag");
 	}
 }
