@@ -13,7 +13,7 @@ public class StatusChangeHandler {
 
 	public void handleStatusChangeEvent(Status status) {
 		if (status.getType().equals(StatusType.GAME)) {
-			System.out.println("Someon is playing: " + status.getStatusMessage());
+			System.out.println("Someone is playing: " + status.getStatusMessage());
 			// need to do persistent storage of default channel
 		}
 	}

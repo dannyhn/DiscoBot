@@ -3,6 +3,7 @@ package com.danny.bot.client.listeners;
 import com.danny.bot.handler.ContextMessageHandler;
 import com.danny.bot.handler.MessageHandler;
 import com.danny.bot.handler.StatusChangeHandler;
+import com.danny.bot.handler.UserVoiceChannelJoinHandler;
 import com.danny.bot.handler.factory.MessageHandlerFactory;
 import com.danny.bot.service.ContextService;
 import com.danny.bot.service.RandomWordService;
@@ -12,6 +13,7 @@ import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
 import sx.blah.discord.handle.impl.events.ReadyEvent;
 import sx.blah.discord.handle.impl.events.StatusChangeEvent;
+import sx.blah.discord.handle.impl.events.UserVoiceChannelJoinEvent;
 import sx.blah.discord.handle.obj.IMessage;
 import sx.blah.discord.handle.obj.Status;
 
@@ -52,6 +54,13 @@ public class MessageListener {
 			handler.handleMessage(message);
 		}
 
+	}
+	
+	@EventSubscriber
+	public void onUserVoiceChannelJoinEvent(UserVoiceChannelJoinEvent event) {
+		UserVoiceChannelJoinHandler handler = new UserVoiceChannelJoinHandler();
+		handler.handleUserVoiceChannelJoinEvent(event.getChannel(), event.getUser());
+		
 	}
 	
 	private boolean isValidCommand(MessageHandler handler, IMessage message) {
