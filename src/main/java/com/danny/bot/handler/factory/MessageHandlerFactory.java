@@ -12,7 +12,6 @@ import com.danny.bot.handler.QuoteMessageHandler;
 import com.danny.bot.handler.ReadyMessageHandler;
 import com.danny.bot.handler.RollMessageHandler;
 import com.danny.bot.handler.StevenMessageHandler;
-import com.danny.bot.handler.YelpMessageHandler;
 
 import sx.blah.discord.handle.obj.IMessage;
 
@@ -32,8 +31,6 @@ public class MessageHandlerFactory {
 			return new InfoMessageHandler();
 		} else if (message.getContent().toLowerCase().startsWith(".steven")) {
 			return new StevenMessageHandler();
-		} else if (message.getContent().toLowerCase().startsWith(".yelp")) {
-			return new YelpMessageHandler();
 		} else if (message.getContent().toLowerCase().startsWith(".c")) {
 			return new ComplimentMessageHandler();
 		} else if (message.getContent().toLowerCase().startsWith(".quote")) {

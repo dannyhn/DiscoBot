@@ -8,9 +8,9 @@ package com.danny.bot.client.constants;
  */
 public final class ClientConstants {
 
-	public static final String TOKEN = "";
+	public static final String TOKEN = "NDA4ODQwMjUyODE2MzU5NDM1.DVWBOw.iZ7D_xxFfZKpqGrwFBGWDTgnAII";
 	
-	public static final String BOTNAME = "DannyBot";
+	public static final String BOTNAME = "QBot";
 	
 }
  
